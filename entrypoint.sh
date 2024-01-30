@@ -8,7 +8,8 @@ echo "==================================="
 
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${INPUT_EMAIL}"
-git config --global --add safe.directory /github/workspace
+# git config --global --add safe.directory /github/workspace
+git config --global --add safe.directory "*"
 
 args_key="${key}"
 args_files="${files}"
@@ -69,7 +70,8 @@ for CURRENT_BRANCH in ${ALL_THE_BRANCHES[@]};
     
     # Check out the current branch, but only if
     # the branch is NOT the same as the key branch
-    if [ "${KEY_BRANCH}" != "${CURRENT_BRANCH}" ];
+    # if [ "${KEY_BRANCH}" != "${CURRENT_BRANCH}" ];
+    if [ "${KEY_BRANCH}" != "${CURRENT_BRANCH}" ] && [ "${CURRENT_BRANCH}" != "main" ]  ;
     then
       echo "--GIT FETCH origin"
       git fetch origin
